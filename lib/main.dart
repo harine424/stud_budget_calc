@@ -21,11 +21,15 @@ class BudgetPage extends StatefulWidget {
 }
 
 class _BudgetPageState extends State<BudgetPage> {
+  final _BudgetController = TextEditingController();
+  final _ExpenseController = TextEditingController();
+  double _balance = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Student Budget")),
-      body: const Center(child: Text("Step 1: Skeleton Ready")),
+      appBar: AppBar(title: const Text("Student Budget Calculator")),
+      body: const Center(child: Text("Budget Calculator UI goes here")),
     );
   }
 }
