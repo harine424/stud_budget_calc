@@ -1,4 +1,6 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,16 +33,26 @@ class _BudgetPageState extends State<BudgetPage> {
     setState(() {
       _balance = budget - expenses;
     });
+    if (_balance < 10) {
+      AudioPlayer().play(AssetSource('audios/bongo.wav'));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Student Budget Calculator")),
+      appBar: AppBar(
+        title: Text('Student Budget Calculator', style: GoogleFonts.poppins()),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset('assets/images/logo_uum.png', height: 100),
+            const SizedBox(height: 20),
+            Text('Student Budget', style: GoogleFonts.lato()),
+            const SizedBox(height: 20),
+
             TextField(
               controller: _BudgetController,
               decoration: const InputDecoration(
