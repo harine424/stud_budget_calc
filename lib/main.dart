@@ -25,6 +25,14 @@ class _BudgetPageState extends State<BudgetPage> {
   final _ExpenseController = TextEditingController();
   double _balance = 0.0;
 
+  void _calculateBalance() {
+    double budget = double.tryParse(_BudgetController.text) ?? 0.0;
+    double expenses = double.tryParse(_ExpenseController.text) ?? 0.0;
+    setState(() {
+      _balance = budget - expenses;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +55,7 @@ class _BudgetPageState extends State<BudgetPage> {
               ),
               keyboardType: TextInputType.number,
             ),
+            // Calculate balance when button is pressed
             ElevatedButton(
               onPressed: () {},
 
