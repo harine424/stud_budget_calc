@@ -61,6 +61,10 @@ class _BudgetPageState extends State<BudgetPage> {
 
               child: const Text("Calculate Balance"),
             ),
+            Text(
+              "Your remaining balance is: \$${_balance.toStringAsFixed(2)}",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ),
