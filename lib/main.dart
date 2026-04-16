@@ -47,6 +47,11 @@ class _BudgetPageState extends State<BudgetPage> {
               ),
               keyboardType: TextInputType.number,
             ),
+            ElevatedButton(
+              onPressed: () {},
+
+              child: const Text("Calculate Balance"),
+            ),
           ],
         ),
       ),
