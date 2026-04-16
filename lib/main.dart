@@ -35,7 +35,6 @@ class _BudgetPageState extends State<BudgetPage> {
       _balance = budget - expenses;
     });
     if (_balance < 10) {
-      const SizedBox(height: 40);
       _warningMessage =
           "Your balance is low! Consider reviewing your expenses.";
       AudioPlayer().play(AssetSource('audios/alarm_beep.wav'));
@@ -47,8 +46,17 @@ class _BudgetPageState extends State<BudgetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.deepPurple[50],
       appBar: AppBar(
-        title: Text('Student Budget Calculator', style: GoogleFonts.poppins()),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(
+          'Student Budget Calculator',
+          style: GoogleFonts.poppins(
+            color: const Color.fromARGB(255, 18, 10, 26),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -56,12 +64,12 @@ class _BudgetPageState extends State<BudgetPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/budgetcalc.png', height: 300),
+              Image.asset('assets/images/budgetcalc.png', height: 500),
               const SizedBox(height: 30),
               Text(
-                'Student Budget',
+                'You can key in your monthly budget and expenses to calculate your remaining balance.',
                 style: GoogleFonts.acme(
-                  fontSize: 32,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -71,13 +79,18 @@ class _BudgetPageState extends State<BudgetPage> {
                 controller: _budgetController,
                 decoration: const InputDecoration(
                   labelText: "Enter your monthly budget here",
+                  filled: true,
+                  fillColor: Color.fromARGB(255, 220, 202, 243),
                 ),
                 keyboardType: TextInputType.number,
               ),
+              const SizedBox(height: 20),
               TextField(
                 controller: _expenseController,
                 decoration: const InputDecoration(
                   labelText: "Enter your monthly expenses here",
+                  filled: true,
+                  fillColor: Color.fromARGB(255, 220, 202, 243),
                 ),
                 keyboardType: TextInputType.number,
               ),
@@ -85,10 +98,14 @@ class _BudgetPageState extends State<BudgetPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _calculateBalance,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 3, 38, 66),
+                  foregroundColor: Colors.white,
+                ),
                 child: const Text("Calculate Balance"),
               ),
               if (_warningMessage.isNotEmpty) ...[
-                const SizedBox(height: 20),
+                const SizedBox(height: 40),
                 Text(
                   _warningMessage,
                   textAlign: TextAlign.center,
@@ -107,6 +124,7 @@ class _BudgetPageState extends State<BudgetPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(height: 40),
             ],
           ),
         ),
