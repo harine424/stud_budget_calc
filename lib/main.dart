@@ -50,7 +50,13 @@ class _BudgetPageState extends State<BudgetPage> {
           children: [
             Image.asset('assets/images/budgetcalc.png', height: 300),
             const SizedBox(height: 30),
-            Text('Student Budget', style: GoogleFonts.lato()),
+            Text(
+              'Student Budget',
+              style: GoogleFonts.acme(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 20),
 
             TextField(
