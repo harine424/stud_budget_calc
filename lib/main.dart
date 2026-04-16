@@ -23,18 +23,18 @@ class BudgetPage extends StatefulWidget {
 }
 
 class _BudgetPageState extends State<BudgetPage> {
-  final _BudgetController = TextEditingController();
-  final _ExpenseController = TextEditingController();
+  final _budgetController = TextEditingController();
+  final _expenseController = TextEditingController();
   double _balance = 0.0;
 
   void _calculateBalance() {
-    double budget = double.tryParse(_BudgetController.text) ?? 0.0;
-    double expenses = double.tryParse(_ExpenseController.text) ?? 0.0;
+    double budget = double.tryParse(_budgetController.text) ?? 0.0;
+    double expenses = double.tryParse(_expenseController.text) ?? 0.0;
     setState(() {
       _balance = budget - expenses;
     });
     if (_balance < 10) {
-      AudioPlayer().play(AssetSource('audios/bongo.wav'));
+      AudioPlayer().play(AssetSource('audios/alarm_beep.wav'));
     }
   }
 
@@ -44,45 +44,51 @@ class _BudgetPageState extends State<BudgetPage> {
       appBar: AppBar(
         title: Text('Student Budget Calculator', style: GoogleFonts.poppins()),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset('assets/images/budgetcalc.png', height: 300),
-            const SizedBox(height: 30),
-            Text(
-              'Student Budget',
-              style: GoogleFonts.acme(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/budgetcalc.png', height: 300),
+              const SizedBox(height: 30),
+              Text(
+                'Student Budget',
+                style: GoogleFonts.acme(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
+              const SizedBox(height: 20),
 
-            TextField(
-              controller: _BudgetController,
-              decoration: const InputDecoration(
-                labelText: "Enter your monthly budget here",
+              TextField(
+                controller: _budgetController,
+                decoration: const InputDecoration(
+                  labelText: "Enter your monthly budget here",
+                ),
+                keyboardType: TextInputType.number,
               ),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
-              controller: _ExpenseController,
-              decoration: const InputDecoration(
-                labelText: "Enter your monthly expenses here",
+              TextField(
+                controller: _expenseController,
+                decoration: const InputDecoration(
+                  labelText: "Enter your monthly expenses here",
+                ),
+                keyboardType: TextInputType.number,
               ),
-              keyboardType: TextInputType.number,
-            ),
-            // Calculate balance when button is pressed
-            ElevatedButton(
-              onPressed: _calculateBalance,
-              child: const Text("Calculate Balance"),
-            ),
-            Text(
-              "Your remaining balance is: \$${_balance.toStringAsFixed(2)}",
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ],
+              // Calculate balance when button is pressed
+              ElevatedButton(
+                onPressed: _calculateBalance,
+                child: const Text("Calculate Balance"),
+              ),
+              Text(
+                "Your remaining balance is: \$${_balance.toStringAsFixed(2)}",
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
