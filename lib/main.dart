@@ -69,8 +69,7 @@ class _BudgetPageState extends State<BudgetPage> {
             ),
             // Calculate balance when button is pressed
             ElevatedButton(
-              onPressed: () {},
-
+              onPressed: _calculateBalance,
               child: const Text("Calculate Balance"),
             ),
             Text(
