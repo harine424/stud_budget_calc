@@ -26,6 +26,7 @@ class _BudgetPageState extends State<BudgetPage> {
   final _budgetController = TextEditingController();
   final _expenseController = TextEditingController();
   double _balance = 0.0;
+  String _warningMessage = "";
 
   void _calculateBalance() {
     double budget = double.tryParse(_budgetController.text) ?? 0.0;
@@ -34,7 +35,12 @@ class _BudgetPageState extends State<BudgetPage> {
       _balance = budget - expenses;
     });
     if (_balance < 10) {
+      const SizedBox(height: 40);
+      _warningMessage =
+          "Your balance is low! Consider reviewing your expenses.";
       AudioPlayer().play(AssetSource('audios/alarm_beep.wav'));
+    } else {
+      _warningMessage = "";
     }
   }
 
@@ -76,12 +82,26 @@ class _BudgetPageState extends State<BudgetPage> {
                 keyboardType: TextInputType.number,
               ),
               // Calculate balance when button is pressed
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _calculateBalance,
                 child: const Text("Calculate Balance"),
               ),
+              if (_warningMessage.isNotEmpty) ...[
+                const SizedBox(height: 20),
+                Text(
+                  _warningMessage,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+              const SizedBox(height: 40),
               Text(
-                "Your remaining balance is: \$${_balance.toStringAsFixed(2)}",
+                "Your remaining balance is: RM ${_balance.toStringAsFixed(2)}",
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
