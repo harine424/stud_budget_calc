@@ -48,8 +48,8 @@ class _BudgetPageState extends State<BudgetPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/logo_uum.png', height: 100),
-            const SizedBox(height: 20),
+            Image.asset('assets/images/budgetcalc.png', height: 300),
+            const SizedBox(height: 30),
             Text('Student Budget', style: GoogleFonts.lato()),
             const SizedBox(height: 20),
 
