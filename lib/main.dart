@@ -29,7 +29,20 @@ class _BudgetPageState extends State<BudgetPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Student Budget Calculator")),
-      body: const Center(child: Text("Budget Calculator UI goes here")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _BudgetController,
+              decoration: const InputDecoration(
+                labelText: "Enter your monthly budget here",
+              ),
+              keyboardType: TextInputType.number,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
