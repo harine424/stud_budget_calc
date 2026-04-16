@@ -40,6 +40,13 @@ class _BudgetPageState extends State<BudgetPage> {
               ),
               keyboardType: TextInputType.number,
             ),
+            TextField(
+              controller: _ExpenseController,
+              decoration: const InputDecoration(
+                labelText: "Enter your monthly expenses here",
+              ),
+              keyboardType: TextInputType.number,
+            ),
           ],
         ),
       ),
